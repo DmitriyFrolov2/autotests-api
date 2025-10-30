@@ -18,7 +18,7 @@ class APIClient:
         Выполняет GET-запрос.
 
         :param url: URL-адрес эндпоинта.
-        :param params: GET-параметры запроса (например, ?key=value).
+        :param params:QueryParams GET-параметры запроса (например, ?key=value).
         :return: Объект Response с данными ответа.
         """
         return self.client.get(url, params=params)

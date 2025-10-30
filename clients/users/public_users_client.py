@@ -5,7 +5,7 @@ from httpx import Response
 from clients.api_client import APIClient
 
 
-class CreateUserRequest(TypedDict):
+class CreateUserRequestDict(TypedDict):
     """
     Структура тела POST-запроса для создания пользователя
     """
@@ -23,7 +23,7 @@ class PublicUsersClient(APIClient):
     Используется для выполнения запросов, не требующих авторизации
     """
 
-    def create_user_api(self, request: CreateUserRequest) -> Response:
+    def create_user_api(self, request: CreateUserRequestDict) -> Response:
         """
         Метод выполняет POST-запрос для создания пользователя
         :param request:Данные пользователя в виде словаря (email, password, lastName, firstName, middleName).

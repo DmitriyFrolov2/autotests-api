@@ -1,6 +1,5 @@
 import grpc
-import course_service_pb2
-import course_service_pb2_grpc
+from grpc import course_service_pb2_grpc, course_service_pb2
 
 # Устанавливаем соединение с сервером
 channel = grpc.insecure_channel('localhost:50051')
