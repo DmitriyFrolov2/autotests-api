@@ -1,7 +1,26 @@
-import httpx
+class Car:
+    def __init__(self, engine, wheels, color):
+        self.engine = engine
+        self.wheels = wheels
+        self.color = color
 
-headers = {"Authorization": "Bearer my_secret_token"}
+class CarBuilder:
+    def __init__(self):
+        self.engine = None
+        self.wheels = 4
+        self.color = "white"
 
-response = httpx.get("https://httpbin.org/get", headers=headers)
+    def set_engine(self, engine):
+        self.engine = engine
+        return self
 
-print(response.json())  # Заголовки включены в ответ
+    def set_color(self, color):
+        self.color = color
+        return self
+
+    def build(self):
+        return Car(self.engine, self.wheels, self.color)
+
+# Использование:
+builder = CarBuilder()
+car = builder.set_engine("V8").set_color("red").build()
