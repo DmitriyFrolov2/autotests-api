@@ -20,9 +20,21 @@ class Exercise(TypedDict):
 
 
 
-class GetExerciseResponseDict(TypedDict):
+class GetExerciseResponse(TypedDict):
     """
     Описание структуры ответа при получении одного задания.
+    """
+    exercise: Exercise
+
+class CreateExerciseResponse(TypedDict):
+    """
+    Структура ответа при создании задания.
+    """
+    exercise: Exercise
+
+class UpdateExerciseResponse(TypedDict):
+    """
+    Структура ответа при обновлении задания.
     """
     exercise: Exercise
 
@@ -105,7 +117,7 @@ class ExercisesClient(APIClient):
 
     # ----------- Методы верхнего уровня -----------
 
-    def get_exercise(self, exercise_id: str) -> GetExerciseResponseDict:
+    def get_exercise(self, exercise_id: str) -> GetExerciseResponse:
         response = self.get_exercise_api(exercise_id)
         return response.json()
 
@@ -113,11 +125,11 @@ class ExercisesClient(APIClient):
         response = self.get_exercises_api(query)
         return response.json()
 
-    def create_exercise(self, request: CreateExerciseRequestDict) -> GetExerciseResponseDict:
+    def create_exercise(self, request: CreateExerciseRequestDict) -> CreateExerciseResponse:
         response = self.create_exercise_api(request)
         return response.json()
 
-    def update_exercise(self, exercise_id: str, request: UpdateExerciseRequestDict) -> GetExerciseResponseDict:
+    def update_exercise(self, exercise_id: str, request: UpdateExerciseRequestDict) -> UpdateExerciseResponse:
         response = self.update_exercise_api(exercise_id, request)
         return response.json()
 
