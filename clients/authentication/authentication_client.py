@@ -13,7 +13,6 @@ class AuthenticationClient(APIClient):
     Клиент для работы с /api/v1/authentication
     """
 
-    # Теперь используем pydantic-модель для аннотации
     def login_api(self, request: LoginRequestSchema) -> Response:
         """
         Метод выполняет аутентификацию пользователя.
