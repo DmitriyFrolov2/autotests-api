@@ -6,6 +6,7 @@ from clients.users.public_users_client import get_public_users_client
 from clients.users.users_schema import CreateUserRequestSchema
 from tools.assertions.authentication import assert_login_response
 from tools.assertions.base import assert_status_code
+from tools.assertions.schema import validate_json_schema
 
 
 def test_login():
@@ -13,7 +14,7 @@ def test_login():
     authentication_client = get_authentication_client()
 
     request = CreateUserRequestSchema()
-    response = public_users_client.create_user(request)
+    public_users_client.create_user(request)
 
     login_request = LoginRequestSchema(
         email=request.email,
@@ -21,10 +22,9 @@ def test_login():
     )
 
     login_response = authentication_client.login_api(login_request)
-
     login_response_data = LoginResponseSchema.model_validate_json(login_response.text)
 
     assert_status_code(login_response.status_code, HTTPStatus.OK)
-
     assert_login_response(login_response_data)
-    print(login_request, login_response_data, login_response)
+
+    validate_json_schema(login_response.json(), login_response_data.model_json_schema())
