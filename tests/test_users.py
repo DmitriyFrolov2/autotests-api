@@ -20,3 +20,4 @@ def test_create_user():
 
     # Проверяем, что тело ответа соответствует ожидаемой JSON-схеме
     validate_json_schema(response.json(), response_data.model_json_schema())
+
