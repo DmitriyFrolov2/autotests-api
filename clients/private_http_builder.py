@@ -7,7 +7,7 @@ from clients.authentication.authentication_schema import LoginRequestSchema
 
 
 # Добавили суффикс Schema вместо Dict
-class AuthenticationUserSchema(BaseModel):  # Наследуем от BaseModel вместо TypedDict
+class AuthenticationUserSchema(BaseModel):
     email: str
     password: str
 
@@ -15,7 +15,6 @@ class AuthenticationUserSchema(BaseModel):  # Наследуем от BaseModel 
 def get_private_http_client(user: AuthenticationUserSchema) -> Client:
     authentication_client = get_authentication_client()
 
-    # Используем модель LoginRequestSchema
     # Значения теперь извлекаем не по ключу, а через атрибуты
     login_request = LoginRequestSchema(email=user.email, password=user.password)
     login_response = authentication_client.login(login_request)
